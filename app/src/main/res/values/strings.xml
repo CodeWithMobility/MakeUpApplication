@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MakeApplication</string>
+
+    <string name="some_error">Some Error</string>
+
+    <!--Drawer Menus-->
+    <string name="about">About</string>
+    <string name="logout">Logout</string>
+    <string name="feed">My Feed</string>
+    <string name="rate_us">Rate Us</string>
+
+
+
+    <!--Drawer-->
+    <string name="open_drawer">Drawer Open</string>
+    <string name="close_drawer">Drawer Close</string>
+
+    <string name="all">All</string>
+    <string name="productTypeList">Product Type List</string>
+    <string name="brandList">Brand List</string>
+    <string name="tagList">Tag List</string>
+</resources>

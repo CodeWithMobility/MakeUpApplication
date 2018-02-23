@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@android:color/white"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/allButton"
+        android:layout_width="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_style"
+        android:layout_height="45dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="@string/all" />
+
+    <Button
+        android:id="@+id/productButton"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/button_style"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="@string/productTypeList" />
+
+    <Button
+        android:id="@+id/brandButton"
+        android:background="@drawable/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="@string/brandList" />
+
+    <Button
+        android:id="@+id/tagButton"
+        android:background="@drawable/button_style"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_height="45dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="@string/tagList" />
+</LinearLayout>
