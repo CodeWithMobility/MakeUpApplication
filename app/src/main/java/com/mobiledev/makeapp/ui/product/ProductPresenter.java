@@ -15,4 +15,7 @@ public interface ProductPresenter<V extends ProductView> extends MvpPresenter<V>
 
     void fetchProductbyTag(String tagName);
 
+    void fetchProductbyBrand(String brandName);
+
+    void fetchProductbyType(String typeName);
    }

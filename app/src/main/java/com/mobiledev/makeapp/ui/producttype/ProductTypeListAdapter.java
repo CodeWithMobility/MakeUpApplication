@@ -1,10 +1,9 @@
-package com.mobiledev.makeapp.ui.tag;
+package com.mobiledev.makeapp.ui.producttype;
 
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mobiledev.makeapp.R;
-import com.mobiledev.makeapp.data.model.ProductModel;
 import com.mobiledev.makeapp.ui.base.BaseActivity;
 import com.mobiledev.makeapp.ui.base.BaseAdapter;
 import com.mobiledev.makeapp.ui.base.BaseViewHolder;
@@ -13,20 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by manu on 2/22/2018.
+ * Created by manu on 2/24/2018.
  */
 
-public class TagListAdapter extends BaseAdapter
-{
+public class ProductTypeListAdapter extends BaseAdapter {
+
     protected ArrayList<String> tagList = new ArrayList<>();
-    OnTagClickListener onTagClickListener;
-    public TagListAdapter(BaseActivity activity) {
+    OnTypeClickListener onTypeClickListener;
+
+    public ProductTypeListAdapter(BaseActivity activity) {
         super(activity);
     }
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TagViewHolder(getInflater().inflate(R.layout.tag_row,parent, false),onTagClickListener);
+        return new ProductTypeViewHolder(getInflater().inflate(R.layout.tag_row,parent, false),onTypeClickListener);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class TagListAdapter extends BaseAdapter
         return tagList.size();
     }
 
-    interface OnTagClickListener {
-        void onTagClick(String s, View v);
+    interface OnTypeClickListener {
+        void onTypeClick(String s, View v);
     }
 
     public void addItems(List<? extends String> results) {
@@ -49,9 +49,9 @@ public class TagListAdapter extends BaseAdapter
         int firstPosition = tagList.size() == 0 ? 0 : tagList.size() - 1;
         tagList.addAll(results);
         //notifyDataSetChanged();
-       notifyItemRangeChanged(firstPosition, results.size());
+        notifyItemRangeChanged(firstPosition, results.size());
     }
-    public void setOnItemClickListener(OnTagClickListener onTagClickListener) {
-        this.onTagClickListener = onTagClickListener;
+    public void setOnItemClickListener(OnTypeClickListener onTypeClickListener) {
+        this.onTypeClickListener = onTypeClickListener;
     }
 }

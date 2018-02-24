@@ -14,7 +14,9 @@ public interface IApiHelper {
 
 
     Observable<List<ProductModel>> getProductAll();
-    Observable<List<ProductModel>> getProduct(String productType);
+    Observable<List<ProductModel>> getProductByType(String productType);
     Observable<List<ProductModel>> getProductByTag(String tagname);
+    Observable<List<ProductModel>> getProductByBrand(String brandName);
+
 
 }

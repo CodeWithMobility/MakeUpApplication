@@ -1,4 +1,4 @@
-package com.mobiledev.makeapp.ui.tag;
+package com.mobiledev.makeapp.ui.producttype;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +13,7 @@ import com.mobiledev.makeapp.R;
 import com.mobiledev.makeapp.di.component.ActivityComponent;
 import com.mobiledev.makeapp.ui.base.BaseFragment;
 import com.mobiledev.makeapp.ui.home.HomeActivity;
+import com.mobiledev.makeapp.ui.producttypeboard.ProductTypeBoardFragment;
 import com.mobiledev.makeapp.ui.tagboard.TagBoardFragment;
 
 import java.util.List;
@@ -24,25 +25,25 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by manu on 2/21/2018.
+ * Created by manu on 2/24/2018.
  */
 
-public class TagFragment extends BaseFragment implements TagView, TagListAdapter.OnTagClickListener {
+public class ProductTypeFragment extends BaseFragment  implements ProductTypeView, ProductTypeListAdapter.OnTypeClickListener {
 
 
     @Inject
-    TagPresenter<TagView> mPresenter;
+    ProductTypePresenter<ProductTypeView> mPresenter;
 
     private Unbinder bind;
 
     @Inject
-    TagListAdapter tagListAdapter;
+    ProductTypeListAdapter productTypeListAdapter;
 
     @Inject
     LinearLayoutManager mLayoutManager;
 
     @BindView(R.id.recyclerViewTag)
-    RecyclerView recyclerViewTagList;
+    RecyclerView recyclerViewTypeList;
 
     HomeActivity homeActivity;
 
@@ -62,22 +63,22 @@ public class TagFragment extends BaseFragment implements TagView, TagListAdapter
 
     @Override
     protected void setUp(View view) {
-        tagListAdapter.setOnItemClickListener(this);
+        productTypeListAdapter.setOnItemClickListener(this);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerViewTagList.setLayoutManager(mLayoutManager);
-        recyclerViewTagList.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewTagList.setAdapter(tagListAdapter);
-        mPresenter.fetchTagListAll();
+        recyclerViewTypeList.setLayoutManager(mLayoutManager);
+        recyclerViewTypeList.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewTypeList.setAdapter(productTypeListAdapter);
+        mPresenter.fetchTypeListAll();
     }
 
     @Override
-    public void onTagClick(String s, View v) {
-        homeActivity.addFragment(new TagBoardFragment(),-1, s,true);
+    public void onTypeClick(String s, View v) {
+        homeActivity.addFragment(new ProductTypeBoardFragment(),-1, s,true);
     }
 
     @Override
-    public void onGettingTagList(List<String> stringList) {
-        tagListAdapter.addItems(stringList);
+    public void onGettingTypeList(List<String> stringList) {
+        productTypeListAdapter.addItems(stringList);
 
     }
 }

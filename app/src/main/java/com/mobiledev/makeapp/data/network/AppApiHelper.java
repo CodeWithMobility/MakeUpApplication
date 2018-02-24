@@ -26,14 +26,20 @@ public class AppApiHelper implements IApiHelper {
 
 
     @Override
-    public Observable<List<ProductModel>> getProduct(String page) {
-        return mApiService.getProduct( page);
+    public Observable<List<ProductModel>> getProductByType(String productType) {
+        return mApiService.getProductByType( productType);
 
     }
 
     @Override
     public Observable<List<ProductModel>> getProductByTag(String tagname) {
-        return null;
+        return mApiService.getProductByTag(tagname);
+    }
+
+
+    @Override
+    public Observable<List<ProductModel>> getProductByBrand(String brandName) {
+        return mApiService.getProductByBrand(brandName);
     }
 
 

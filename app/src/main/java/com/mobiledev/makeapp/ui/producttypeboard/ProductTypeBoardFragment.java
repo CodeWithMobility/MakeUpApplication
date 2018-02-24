@@ -1,4 +1,4 @@
-package com.mobiledev.makeapp.ui.landing;
+package com.mobiledev.makeapp.ui.producttypeboard;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +9,8 @@ import android.view.ViewGroup;
 import com.mobiledev.makeapp.R;
 import com.mobiledev.makeapp.di.component.ActivityComponent;
 import com.mobiledev.makeapp.ui.base.BaseFragment;
-import com.mobiledev.makeapp.ui.brand.BrandFragment;
 import com.mobiledev.makeapp.ui.home.HomeActivity;
 import com.mobiledev.makeapp.ui.product.ProductFragment;
-import com.mobiledev.makeapp.ui.producttype.ProductTypeFragment;
-import com.mobiledev.makeapp.ui.tag.TagFragment;
-
-
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
@@ -23,79 +18,60 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
- * Created by manu on 2/21/2018.
+ * Created by manu on 2/24/2018.
  */
 
-public class LandingFragment extends BaseFragment implements LandingView {
+public class ProductTypeBoardFragment extends BaseFragment implements ProductTypeBoardView {
 
     @Inject
-    LandingPresenter<LandingView> mPresenter;
+    ProductTypeBoardPresenter<ProductTypeBoardView> mPresenter;
 
     private Unbinder bind;
 
-//    @BindView(R.id.allButton)
-//    Button allButton;
-//
-//    @BindView(R.id.productButton)
-//    Button productButton;
-//
-//    @BindView(R.id.brandButton)
-//    Button brandButton;
-//
-//    @BindView(R.id.tagButton)
-//    Button tagButton;
+    HomeActivity homeActivity;
 
-    private HomeActivity homeActivity;
-
-    private View rootView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_landing,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_tag_board,container,false);
         ActivityComponent component = getActivityComponent();
         if (component != null) {
             component.inject(this);
             mPresenter.onAttach(this);
         }
-        homeActivity = (HomeActivity)getActivity();
         bind = ButterKnife.bind(this, rootView);
-
+        homeActivity = (HomeActivity)getActivity();
         return rootView;
     }
+
 
     @Override
     protected void setUp(View view) {
 
     }
 
-    @OnClick({ R.id.allButton, R.id.productButton, R.id.brandButton , R.id.tagButton})
+
+    @OnClick({ R.id.allButton, R.id.byCategoryButton, R.id.byTagButton})
     public void OnClickViewEvent(View view) {
+
         switch(view.getId())
         {
             case R.id.allButton:{
-                homeActivity.addFragment(new ProductFragment(), 0, null, true);
+                homeActivity.addFragment(new ProductFragment(),1,object,true);
             }
             break;
-            case R.id.productButton:{
-                homeActivity.addFragment(new ProductTypeFragment(),-1, null,true);
+            case R.id.byCategoryButton:{
+
             }
             break;
-            case R.id.brandButton:{
-                homeActivity.addFragment(new BrandFragment(),-1, null,true);
+            case R.id.byTagButton:{
+                // homeActivity.addFragment(new BrandFragment());
             }
             break;
-            case R.id.tagButton:{
-                homeActivity.addFragment(new TagFragment(),-1, null,true);
-            }
-            break;
+
         }
     }
 
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
     @Override
     public void onDestroyView() {
@@ -103,6 +79,5 @@ public class LandingFragment extends BaseFragment implements LandingView {
         mPresenter.onDetach();
         bind.unbind();
     }
-
 
 }

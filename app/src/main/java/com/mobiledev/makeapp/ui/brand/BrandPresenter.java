@@ -12,5 +12,5 @@ import com.mobiledev.makeapp.ui.product.ProductView;
 @PerActivity
 public interface BrandPresenter<V extends BrandView> extends MvpPresenter<V> {
 
-
+    void fetchBrandListAll();
 }

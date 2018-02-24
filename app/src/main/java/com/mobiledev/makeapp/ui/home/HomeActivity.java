@@ -1,23 +1,19 @@
 package com.mobiledev.makeapp.ui.home;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.mobiledev.makeapp.R;
 import com.mobiledev.makeapp.ui.base.BaseActivity;
 import com.mobiledev.makeapp.ui.base.BaseFragment;
 import com.mobiledev.makeapp.ui.landing.LandingFragment;
-import com.mobiledev.makeapp.ui.product.ProductFragment;
 import com.mobiledev.makeapp.ui.test.TestFragment;
 
 import javax.inject.Inject;
@@ -65,16 +61,16 @@ public class HomeActivity extends BaseActivity implements HomeView {
         super.onDestroy();
     }
 
+    public void addFragment(BaseFragment fragment, int productIndex, Object obj, boolean backStack) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+      //  fragmentTransaction.disallowAddToBackStack();
 
-
-
-
-    public void addFragment(BaseFragment fragment) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .disallowAddToBackStack()
-                .replace(R.id.containerView, fragment, null)
-                .commit();
+        fragmentTransaction.replace(R.id.containerView, fragment, null);
+        if(backStack){
+            fragmentTransaction.addToBackStack(fragment.getClass().getName());
+        }
+        fragmentTransaction.commit();
+        fragment.setProductTagIndex(productIndex,obj);
     }
 
 
@@ -103,7 +99,7 @@ public class HomeActivity extends BaseActivity implements HomeView {
         setupNavMenu();
         mPresenter.onNavMenuCreated();
         mPresenter.onViewInitialized();
-        addFragment(new LandingFragment());
+        addFragment(new LandingFragment(), -1, null, false);
     }
 
     void setupNavMenu() {
@@ -113,10 +109,10 @@ public class HomeActivity extends BaseActivity implements HomeView {
                     mDrawer.closeDrawer(GravityCompat.START);
                     switch (item.getItemId()) {
                         case R.id.nav_item_about:
-                            addFragment(new LandingFragment());
+                            addFragment(new LandingFragment(),-1, null,false);
                             return true;
                         case R.id.nav_item_rate_us:
-                            addFragment(new TestFragment());
+                            addFragment(new TestFragment(),-1, null,false);
                             return true;
                         case R.id.nav_item_feed:
                             mPresenter.onViewInitialized();

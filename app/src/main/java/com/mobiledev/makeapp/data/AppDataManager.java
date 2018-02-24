@@ -2,6 +2,7 @@ package com.mobiledev.makeapp.data;
 
 import android.content.Context;
 
+
 import com.mobiledev.makeapp.data.model.ProductModel;
 import com.mobiledev.makeapp.data.network.IApiHelper;
 import com.mobiledev.makeapp.di.scope.ApplicationContext;
@@ -12,7 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 
 /**
  * Created by manu on 2/18/2018.
@@ -44,14 +44,20 @@ public class AppDataManager implements DataManager {
 
 
     @Override
-    public Observable<List<ProductModel>> getProduct(String productType) {
-        return mApiHelper.getProduct(productType).map(productModel -> productModel);
+    public Observable<List<ProductModel>> getProductByType(String productType) {
+        return mApiHelper.getProductByType(productType).map(productModel -> productModel);
     }
 
     @Override
     public Observable<List<ProductModel>> getProductByTag(String tagName) {
         return mApiHelper.getProductByTag(tagName).map(productModel -> productModel);
     }
+
+    @Override
+    public Observable<List<ProductModel>> getProductByBrand(String brandName) {
+        return mApiHelper.getProductByBrand(brandName).map(productModel -> productModel);
+    }
+
 
 
     //    @Override

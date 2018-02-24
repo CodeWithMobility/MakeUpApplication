@@ -2,8 +2,9 @@ package com.mobiledev.makeapp.ui.brand;
 
 import com.mobiledev.makeapp.data.DataManager;
 import com.mobiledev.makeapp.ui.base.BasePresenter;
-import com.mobiledev.makeapp.ui.product.ProductPresenter;
-import com.mobiledev.makeapp.ui.product.ProductView;
+import com.mobiledev.makeapp.utils.arrayUtils.ArrayUtils;
+
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -19,5 +20,11 @@ public class BrandPresenterImpl<V extends BrandView> extends BasePresenter<V> im
     @Inject
     public BrandPresenterImpl(DataManager controller, CompositeDisposable compositeDisposable) {
         super(controller, compositeDisposable);
+    }
+
+    @Override
+    public void fetchBrandListAll() {
+        ArrayUtils arrayUtils = new ArrayUtils();
+        getMvpView().onGettingBrandList(Arrays.asList(arrayUtils.getBrandList()));
     }
 }

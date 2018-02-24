@@ -21,6 +21,8 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     private BaseActivity mActivity;
     private Unbinder mUnBinder;
     private ProgressDialog mProgressDialog;
+    public int productIndex;
+    public Object object;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,6 +113,11 @@ public abstract class BaseFragment extends Fragment implements MvpView {
             return mActivity.getActivityComponent();
         }
         return null;
+    }
+
+    public void setProductTagIndex(int productIndex, Object object){
+        this.productIndex = productIndex;
+        this.object = object;
     }
 
     public BaseActivity getBaseActivity() {

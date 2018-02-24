@@ -5,13 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.mobiledev.makeapp.data.model.ProductModel;
 import com.mobiledev.makeapp.di.scope.ActivityContext;
 import com.mobiledev.makeapp.di.scope.PerActivity;
 import com.mobiledev.makeapp.ui.base.BaseActivity;
+import com.mobiledev.makeapp.ui.brand.BrandListAdapter;
 import com.mobiledev.makeapp.ui.brand.BrandPresenter;
 import com.mobiledev.makeapp.ui.brand.BrandPresenterImpl;
 import com.mobiledev.makeapp.ui.brand.BrandView;
+import com.mobiledev.makeapp.ui.brandboard.BrandBoardPresenter;
+import com.mobiledev.makeapp.ui.brandboard.BrandBoardPresenterImpl;
+import com.mobiledev.makeapp.ui.brandboard.BrandBoardView;
 import com.mobiledev.makeapp.ui.details.DetailsPresenter;
 import com.mobiledev.makeapp.ui.details.DetailsPresenterImpl;
 import com.mobiledev.makeapp.ui.details.DetailsView;
@@ -25,6 +28,13 @@ import com.mobiledev.makeapp.ui.product.ProductAdapter;
 import com.mobiledev.makeapp.ui.product.ProductPresenter;
 import com.mobiledev.makeapp.ui.product.ProductPresenterImpl;
 import com.mobiledev.makeapp.ui.product.ProductView;
+import com.mobiledev.makeapp.ui.producttype.ProductTypeListAdapter;
+import com.mobiledev.makeapp.ui.producttype.ProductTypePresenter;
+import com.mobiledev.makeapp.ui.producttype.ProductTypePresenterImpl;
+import com.mobiledev.makeapp.ui.producttype.ProductTypeView;
+import com.mobiledev.makeapp.ui.producttypeboard.ProductTypeBoardPresenter;
+import com.mobiledev.makeapp.ui.producttypeboard.ProductTypeBoardPresenterImpl;
+import com.mobiledev.makeapp.ui.producttypeboard.ProductTypeBoardView;
 import com.mobiledev.makeapp.ui.splash.SplashPresenter;
 import com.mobiledev.makeapp.ui.splash.SplashPresenterImpl;
 import com.mobiledev.makeapp.ui.splash.SplashView;
@@ -35,8 +45,6 @@ import com.mobiledev.makeapp.ui.tag.TagView;
 import com.mobiledev.makeapp.ui.tagboard.TagBoardPresenter;
 import com.mobiledev.makeapp.ui.tagboard.TagBoardPresenterImpl;
 import com.mobiledev.makeapp.ui.tagboard.TagBoardView;
-
-import java.util.ArrayList;
 
 import dagger.Module;
 import dagger.Provides;
@@ -122,6 +130,24 @@ public class ActivityModule {
         return presenter;
     }
 
+
+    @Provides
+    @PerActivity
+    BrandBoardPresenter<BrandBoardView> provideBrandBoardPresenter(BrandBoardPresenterImpl<BrandBoardView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ProductTypePresenter<ProductTypeView> provideProductTypePresenter(ProductTypePresenterImpl<ProductTypeView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    ProductTypeBoardPresenter<ProductTypeBoardView> provideProductTypeBoardPresenter(ProductTypeBoardPresenterImpl<ProductTypeBoardView> presenter) {
+        return presenter;
+    }
     @Provides
     ProductAdapter provideProductAdapter() {
         return new ProductAdapter((BaseActivity) mActivity);
@@ -131,6 +157,16 @@ public class ActivityModule {
     @Provides
     TagListAdapter provideTagAdapter() {
         return new TagListAdapter((BaseActivity) mActivity);
+    }
+
+    @Provides
+    BrandListAdapter provideBrandAdapter() {
+        return new BrandListAdapter((BaseActivity) mActivity);
+    }
+
+    @Provides
+    ProductTypeListAdapter provideProductTypeAdapter() {
+        return new ProductTypeListAdapter((BaseActivity) mActivity);
     }
 
     @Provides

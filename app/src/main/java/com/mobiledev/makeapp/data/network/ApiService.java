@@ -15,12 +15,17 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     @GET("products.json")
-    Observable<List<ProductModel>> getProduct(@Query("product_type") String product_type);
+    Observable<List<ProductModel>> getProductByType(@Query("product_type") String product_type);
 
     @GET("products.json")
     Observable<List<ProductModel>> getProductAll();
 
     @GET("products.json")
     Observable<List<ProductModel>> getProductByTag(@Query("product_tags") String product_tags);
+
+    @GET("products.json")
+    Observable<List<ProductModel>> getProductByBrand(@Query("brand") String brand);
+
+
 
 }

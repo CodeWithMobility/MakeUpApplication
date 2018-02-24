@@ -74,7 +74,28 @@ public class ProductFragment  extends BaseFragment implements ProductView,Produc
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(productAdapter);
-        mPresenter.fetchProductAll();
+        //Log.e("Product  == > ", ""+productIndex);
+
+        switch (productIndex){
+            case 0:{
+                mPresenter.fetchProductAll();
+            }
+            break;
+            case 1:{
+                mPresenter.fetchProductbyType(object.toString());
+            }
+            break;
+
+            case 2:{
+                mPresenter.fetchProductbyBrand(object.toString());
+            }
+            break;
+            case 3:{
+                mPresenter.fetchProductbyTag(object.toString());
+            }
+            break;
+        }
+
     }
 
     @Override

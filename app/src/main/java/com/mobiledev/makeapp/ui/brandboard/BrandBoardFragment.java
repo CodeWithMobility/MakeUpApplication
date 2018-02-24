@@ -1,4 +1,4 @@
-package com.mobiledev.makeapp.ui.tagboard;
+package com.mobiledev.makeapp.ui.brandboard;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,27 +13,31 @@ import com.mobiledev.makeapp.ui.home.HomeActivity;
 import com.mobiledev.makeapp.ui.product.ProductFragment;
 
 import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
- * Created by manu on 2/22/2018.
+ * Created by manu on 2/24/2018.
  */
 
-public class TagBoardFragment extends BaseFragment implements TagBoardView {
+public class BrandBoardFragment extends BaseFragment implements BrandBoardView{
+
+    private View rootView;
 
     @Inject
-    TagBoardPresenter<TagBoardView> mPresenter;
+    BrandBoardPresenter<BrandBoardView> mPresenter;
 
     private Unbinder bind;
 
     HomeActivity homeActivity;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_tag_board,container,false);
+        rootView = inflater.inflate(R.layout.fragment_tag_board,container,false);
         ActivityComponent component = getActivityComponent();
         if (component != null) {
             component.inject(this);
@@ -44,12 +48,10 @@ public class TagBoardFragment extends BaseFragment implements TagBoardView {
         return rootView;
     }
 
-
     @Override
     protected void setUp(View view) {
 
     }
-
 
     @OnClick({ R.id.allButton, R.id.byCategoryButton, R.id.byTagButton})
     public void OnClickViewEvent(View view) {
@@ -57,7 +59,7 @@ public class TagBoardFragment extends BaseFragment implements TagBoardView {
         switch(view.getId())
         {
             case R.id.allButton:{
-                homeActivity.addFragment(new ProductFragment(),3,object,true);
+                homeActivity.addFragment(new ProductFragment(),2,object,true);
             }
             break;
             case R.id.byCategoryButton:{
@@ -65,13 +67,12 @@ public class TagBoardFragment extends BaseFragment implements TagBoardView {
             }
             break;
             case R.id.byTagButton:{
-               // homeActivity.addFragment(new BrandFragment());
+                // homeActivity.addFragment(new BrandFragment());
             }
             break;
 
         }
     }
-
 
     @Override
     public void onDestroyView() {
@@ -79,5 +80,4 @@ public class TagBoardFragment extends BaseFragment implements TagBoardView {
         mPresenter.onDetach();
         bind.unbind();
     }
-
 }

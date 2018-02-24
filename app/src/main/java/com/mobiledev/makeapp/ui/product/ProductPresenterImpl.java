@@ -4,7 +4,6 @@ package com.mobiledev.makeapp.ui.product;
 import com.mobiledev.makeapp.data.DataManager;
 import com.mobiledev.makeapp.data.model.ProductModel;
 import com.mobiledev.makeapp.ui.base.BasePresenter;
-import com.mobiledev.makeapp.utils.LogUtils.AppLogger;
 
 import java.util.List;
 
@@ -85,6 +84,7 @@ public class ProductPresenterImpl<V extends ProductView> extends BasePresenter<V
 
     @Override
     public void fetchProductbyTag(String tagName) {
+        getMvpView().showLoading();
         getCompositeDisposable().add(getDataManager()
                 .getProductByTag(tagName)
                 .timeInterval()
@@ -107,6 +107,58 @@ public class ProductPresenterImpl<V extends ProductView> extends BasePresenter<V
                     }
                 }));
 
+    }
+
+    @Override
+    public void fetchProductbyBrand(String brandName) {
+        getMvpView().showLoading();
+        getCompositeDisposable().add(getDataManager()
+                .getProductByBrand(brandName)
+                .timeInterval()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableObserver<Timed<List<ProductModel>>>() {
+                    @Override
+                    public void onComplete() {
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        getMvpView().hideLoading();
+                    }
+
+                    @Override
+                    public void onNext(Timed<List<ProductModel>> productModels) {
+                        getMvpView().hideLoading();
+                        getMvpView().onGettingProductList(productModels.value());
+                    }
+                }));
+    }
+
+    @Override
+    public void fetchProductbyType(String typeName) {
+        getMvpView().showLoading();
+        getCompositeDisposable().add(getDataManager()
+                .getProductByType(typeName)
+                .timeInterval()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableObserver<Timed<List<ProductModel>>>() {
+                    @Override
+                    public void onComplete() {
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+                        getMvpView().hideLoading();
+                    }
+
+                    @Override
+                    public void onNext(Timed<List<ProductModel>> productModels) {
+                        getMvpView().hideLoading();
+                        getMvpView().onGettingProductList(productModels.value());
+                    }
+                }));
     }
 
 
